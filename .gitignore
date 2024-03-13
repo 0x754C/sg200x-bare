@@ -1,0 +1,5 @@
+*.asm
+*.bin
+*.elf
+compile_commands.json
+.cache/

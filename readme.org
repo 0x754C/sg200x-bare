@@ -1,0 +1,14 @@
+* sg200x bare
+
+* support
+
+| HW         | STAT |
+|------------+------|
+| LED        | OK   |
+| EARLY UART | WIP  |
+
+* run
+
+1. bootup board with uboot
+2. use load sg2002.bin into dram, you can use loadx addr
+3. use go addr command execute it
