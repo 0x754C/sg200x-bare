@@ -1,6 +1,6 @@
 SRCS += boot.s
 
-SRCS += main.c uart.c
+SRCS += main.c led.c key.c uart.c
 
 FW_NAME ?= sg2002
 CROSS_COMPILE ?= riscv64-unknown-elf-
