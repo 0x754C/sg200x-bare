@@ -8,7 +8,7 @@ test on licheervnano
 |------------+------|
 | LED        | OK   |
 | BUTTON     |      |
-| EARLY UART | WIP  |
+| EARLY UART | OK   |
 | UART       |      |
 | MIPI LCD   |      |
 | I2C MASTER |      |

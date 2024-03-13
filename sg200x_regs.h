@@ -4,13 +4,12 @@
 #define UART0_BASE 0x04140000
 
 enum {
-	UART_THR = 0x0,
-	UART_IIR = 0x8,
+  UART_THR = 0x00,
+  UART_LSR = 0x14,
 };
 
 enum {
-	UART_INT_ID_MASK = 0xF,
-	UART_INT_ID_TXOK = 0x2,
+  UART_LSR_THRE = (1 << 6),
 };
 
 #endif
