@@ -1,14 +1,34 @@
 * sg200x bare
 
+test on licheervnano
+
 * support
 
 | HW         | STAT |
 |------------+------|
 | LED        | OK   |
+| BUTTON     |      |
 | EARLY UART | WIP  |
+| UART       |      |
+| MIPI LCD   |      |
+| I2C MASTER |      |
+| USB DEVICE |      |
+| SDIO       |      |
+| SDCARD     |      |
+| ETH        |      |
+
 
 * run
 
 1. bootup board with uboot
-2. use load sg2002.bin into dram, you can use loadx addr
-3. use go addr command execute it
+2. upload sg2002.bin into sg2002 dram, you can use uboot command:
+
+   #+BEGIN_SRC shell
+     loadx 0x80080000
+   #+END_SRC
+
+3. use go addr command execute it:
+
+   #+BEGIN_SRC shell
+     go 0x80080000
+   #+END_SRC
