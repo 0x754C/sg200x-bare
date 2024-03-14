@@ -22,11 +22,12 @@ CFLAGS += -Wall -Wextra -Wno-int-to-pointer-cast \
 	--specs=$(PICOLIBC_ROOT)/picolibc.specs \
 	-T $(LINK_SCRIPT)
 
-all: $(FW_NAME).elf $(FW_NAME).bin $(FW_NAME).asm
+all: gen_fip $(FW_NAME).asm
 	$(SZ) $(FW_NAME).elf
 
 clean:
 	rm -f *.out $(FW_NAME).asm $(FW_NAME).elf $(FW_NAME).bin
+	rm -f chip_conf.bin blcp.bin fip.bin
 
 format:
 	clang-format -i *.c *.h
@@ -39,3 +40,18 @@ $(FW_NAME).asm: $(FW_NAME).elf
 
 $(FW_NAME).bin: $(FW_NAME).elf
 	$(OC) -O binary $(FW_NAME).elf $(FW_NAME).bin
+
+chip_conf:
+	python3 chip_conf.py chip_conf.bin
+
+blcp:
+	touch blcp.bin
+
+gen_fip: $(FW_NAME).bin chip_conf blcp
+	python3 fiptool.py -v genfip \
+		--CHIP_CONF=chip_conf.bin \
+		--BL2=$(FW_NAME).bin \
+		--BLCP_IMG_RUNADDR=0x05200200 \
+		--BLCP_PARAM_LOADADDR=0 \
+		--BLCP=blcp.bin \
+		fip.bin

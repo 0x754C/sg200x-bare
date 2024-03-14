@@ -1,7 +1,19 @@
 	.section .boot
 	.global _start
 
+
+	.option norvc
 _start:
-	li sp, 0x801FFFFC
+	j reset
+	.word 0
+	.word 0 /* BL2 MSID */
+	.word 0 /* BL2 version */
+	.word 0
+	.word 0
+	.word 0
+	.word 0
+
+reset:
+	la sp, __stack_end
 
 	j main

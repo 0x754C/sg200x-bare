@@ -18,17 +18,16 @@ test on licheervnano
 | ETH        |      |
 
 
+* build
+
+#+BEGIN_SRC shell
+  make
+#+END_SRC
+
 * run
 
-1. bootup board with uboot
-2. upload sg2002.bin into sg2002 dram, you can use uboot command:
+copy fip.bin into sdcard first partition
 
-   #+BEGIN_SRC shell
-     loadx 0x80080000
-   #+END_SRC
-
-3. use go addr command execute it:
-
-   #+BEGIN_SRC shell
-     go 0x80080000
-   #+END_SRC
+#+BEGIN_SRC shell
+  cp fip.bin /path/to/sdcardp1/
+#+END_SRC
