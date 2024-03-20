@@ -1,5 +1,3 @@
-OUTPUT_FORMAT("elf64-littleriscv")
-OUTPUT_ARCH(riscv)
 ENTRY(_start)
 MEMORY {
 	TPU_SRAM (rwx): ORIGIN = 0x0C00000, LENGTH = 0x20000
@@ -29,8 +27,10 @@ SECTIONS {
 
 	.bss (NOLOAD) : {
 		. = ALIGN(8);
+		PROVIDE(__bss_start = .);
 		*(.bss*)
 		*(.sbss*)
+		PROVIDE(__bss_end = .);
 		. = ALIGN(8);
 	} > TPU_SRAM
 

@@ -4,9 +4,12 @@
 enum {
   SYSC_BASE = 0x03000000,
   PINMUX_BASE = 0x03001000,
+  PLLG2_BASE = 0x03002800,
   RSTC_BASE = 0x03003000,
   GPIO0_BASE = 0x03020000,
+  EFUSE_BASE = 0x03050000,
   UART0_BASE = 0x04140000,
+  USB0_BASE = 0x04340000,
 };
 
 enum {
@@ -14,6 +17,7 @@ enum {
   SYSC_CONF_CTRL = 0x08,
   SYSC_CONF_USBPHY = 0x48,
   SYSC_CONF_WDT = 0x1a8,
+  SYSC_CONF_GP_REG3 = 0x8C, /* use for ddr initial */
 };
 
 enum {
@@ -23,10 +27,22 @@ enum {
   SYSC_CONF_INFO_BOOTSRC_EMMC = 0x3,
   SYSC_CONF_INFO_BOOTSRC_NOR = 0x2,
   SYSC_CONF_INFO_BOOTSRC_NAND = 0x0,
+  SYSC_CONF_INFO_IOSTA_PKG_TYPE_MASK = (0x7 << 28),
+};
+
+enum {
+  PLLG2_PLL_G2_CTL = 0x00,
+  PLLG2_APLL0_CSR = 0x0C,
+  PLLG2_SSC_SYN_CTL = 0x40,
+  PLLG2_APLL_SCC_SYN_CTL = 0x50,
+  PLLG2_APLL_SCC_SYN_SET = 0x54,
+
 };
 
 enum {
   PINMUX_SD0_PWR_EN = 0x38,
+  PINMUX_SPK_EN = 0x3C,
+  PINMUX_EMMC_DAT1 = 0x60,
   PINMUX_AUX0 = 0x78,
 };
 
@@ -74,6 +90,13 @@ enum {
 
 enum {
   UART_LSR_THRE = (1 << 6),
+};
+
+enum {
+  USBC_CTRL = 0x00,
+  USBC_AHBCFG = 0x08,
+  USBC_USBCFG = 0x0C,
+  USBC_RESET = 0x10,
 };
 
 #endif

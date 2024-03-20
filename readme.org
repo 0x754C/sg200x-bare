@@ -4,8 +4,10 @@ test on licheervnano
 
 * support
 
-| HW         | STAT |
+| DRIVER     | STAT |
 |------------+------|
+| RISCV      | OK   |
+| AARCH64    |      |
 | LED        | OK   |
 | BUTTON     | OK   |
 | EARLY UART | OK   |
@@ -26,8 +28,8 @@ test on licheervnano
 
 * run
 
-copy fip.bin into sdcard first partition
+remove your board sdcard, then plug usb cable
 
 #+BEGIN_SRC shell
-  cp fip.bin /path/to/sdcardp1/
+  make flash
 #+END_SRC

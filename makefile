@@ -1,9 +1,24 @@
-SRCS += boot.s
+ARCH ?= riscv
 
-SRCS += main.c led.c key.c uart.c
+SRCS += boot_$(ARCH).s
+
+SRCS += main.c led.c key.c uart.c log.c
+
+INCS += -I./
 
 FW_NAME ?= sg2002
-CROSS_COMPILE ?= riscv64-unknown-elf-
+
+ifeq ($(ARCH),aarch64)
+	CROSS_COMPILE ?= aarch64-none-elf-
+	CFLAGS += -march=armv8-a -mlittle-endian -mabi=lp64
+endif
+
+ifeq ($(ARCH),riscv)
+	CROSS_COMPILE ?= riscv-none-elf-
+	CFLAGS += -march=rv64imac_zicsr -mabi=lp64 -mcmodel=medany -mcpu=thead-c906
+endif
+
+
 CC = $(CROSS_COMPILE)gcc
 OD = $(CROSS_COMPILE)objdump
 OC = $(CROSS_COMPILE)objcopy
@@ -11,16 +26,11 @@ SZ = $(CROSS_COMPILE)size
 
 LINK_SCRIPT ?= link.ld
 
-PICOLIBC_ROOT ?= /usr/lib/picolibc/riscv64-unknown-elf/
-
-CFLAGS += -Wall -Wextra -Wno-int-to-pointer-cast \
-	-march=rv64imac -mabi=lp64 -mcmodel=medany -Os -g3 \
+CFLAGS += -Wall -Wextra -Wno-int-to-pointer-cast -Os -g3 \
 	-fdata-sections -ffunction-sections -Wl,--gc-sections \
 	-nostartfiles \
-	-I$(PICOLIBC_ROOT)/include \
-	-L$(PICOLIBC_ROOT)/lib \
-	--specs=$(PICOLIBC_ROOT)/picolibc.specs \
 	-T $(LINK_SCRIPT)
+
 
 all: gen_fip $(FW_NAME).asm
 	$(SZ) $(FW_NAME).elf
@@ -55,3 +65,6 @@ gen_fip: $(FW_NAME).bin chip_conf blcp
 		--BLCP_PARAM_LOADADDR=0 \
 		--BLCP=blcp.bin \
 		fip.bin
+
+flash:
+	python3 cv181x_dl.py

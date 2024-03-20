@@ -1,7 +1,6 @@
 	.section .boot
 	.global _start
 
-
 	.option norvc
 _start:
 	j reset
