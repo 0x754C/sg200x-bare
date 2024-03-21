@@ -1,4 +1,3 @@
-	.section .boot
 	.global _start
 
 _start:
@@ -12,11 +11,4 @@ _start:
 	.word 0
 
 reset:
-	/* sync icache */
-	ic iallu
-	isb
-
-	ldr x0, =__stack_end
-	mov sp, x0
-
-	b main
+	b reset

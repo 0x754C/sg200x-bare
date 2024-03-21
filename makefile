@@ -1,8 +1,6 @@
-ARCH ?= riscv
+ARCH ?= riscv64
 
 SRCS += boot_$(ARCH).s
-
-SRCS += main.c led.c key.c uart.c log.c
 
 INCS += -I./
 
@@ -13,9 +11,10 @@ ifeq ($(ARCH),aarch64)
 	CFLAGS += -march=armv8-a -mlittle-endian -mabi=lp64
 endif
 
-ifeq ($(ARCH),riscv)
-	CROSS_COMPILE ?= riscv-none-elf-
-	CFLAGS += -march=rv64imac_zicsr -mabi=lp64 -mcmodel=medany -mcpu=thead-c906
+ifeq ($(ARCH),riscv64)
+	CROSS_COMPILE ?= riscv64-none-elf-
+	CFLAGS += -march=rv64imac_zicsr -mabi=lp64 -mcmodel=medany
+	CFLAGS += -mstrict-align
 endif
 
 
@@ -26,8 +25,7 @@ SZ = $(CROSS_COMPILE)size
 
 LINK_SCRIPT ?= link.ld
 
-CFLAGS += -Wall -Wextra -Wno-int-to-pointer-cast -Os -g3 \
-	-fdata-sections -ffunction-sections -Wl,--gc-sections \
+CFLAGS += -Wall -Wextra -Wno-int-to-pointer-cast \
 	-nostartfiles \
 	-T $(LINK_SCRIPT)
 
