@@ -18,7 +18,7 @@ remove your board sdcard, then plug usb cable
 
 some time usb download not working, you can copy fip.bin into sdcard:
 
-```
+#+BEGIN_SRC shell
 #
 # sdcard use MBR partition table
 # first partition is bootable, use FAT filesystem
@@ -43,4 +43,4 @@ some time usb download not working, you can copy fip.bin into sdcard:
 mkdir -p /mnt/boot
 sudo mount /dev/sdX1 /mnt/boot
 sudo cp -v fip.bin /mnt/boot
-```
+#+END_SRC
