@@ -1,5 +1,5 @@
 *~
-*.asm
+*.dis
 *.bin
 *.elf
 compile_commands.json

@@ -1,24 +1,6 @@
-* sg200x bare
+* cvitek bare
 
 test on licheervnano
-
-* support
-
-| DRIVER     | STAT |
-|------------+------|
-| RISCV      | OK   |
-| AARCH64    |      |
-| LED        | OK   |
-| BUTTON     | OK   |
-| EARLY UART | OK   |
-| UART       |      |
-| MIPI LCD   |      |
-| I2C MASTER |      |
-| USB DEVICE |      |
-| SDIO       |      |
-| SDCARD     |      |
-| ETH        |      |
-
 
 * build
 
@@ -33,3 +15,32 @@ remove your board sdcard, then plug usb cable
 #+BEGIN_SRC shell
   make flash
 #+END_SRC
+
+some time usb download not working, you can copy fip.bin into sdcard:
+
+```
+#
+# sdcard use MBR partition table
+# first partition is bootable, use FAT filesystem
+# other partition is optinal
+# sample:
+# 
+# 
+# fdisk -l /dev/sdd
+# Disk /dev/sdd: 29.12 GiB, 31267487744 bytes, 61069312 sectors
+# Disk model: Storage Device  
+# Units: sectors of 1 * 512 = 512 bytes
+# Sector size (logical/physical): 512 bytes / 512 bytes
+# I/O size (minimum/optimal): 512 bytes / 512 bytes
+# Disklabel type: dos
+# Disk identifier: 0x8e149051
+# Device     Boot Start      End  Sectors  Size Id Type
+# /dev/sdd1  *        1    32768    32768   16M  c W95 FAT32 (LBA)
+# /dev/sdd2       32769 61069311 61036543 29.1G 83 Linux
+#
+
+
+mkdir -p /mnt/boot
+sudo mount /dev/sdX1 /mnt/boot
+sudo cp -v fip.bin /mnt/boot
+```

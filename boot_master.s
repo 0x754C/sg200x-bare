@@ -1,7 +1,7 @@
 	.global _start
-
+	.option norvc
 _start:
-	b reset
+	j reset
 	.word 0
 	.word 0 /* BL2 MSID */
 	.word 0 /* BL2 version */
@@ -11,4 +11,6 @@ _start:
 	.word 0
 
 reset:
-	b reset
+	li sp, 0x0C001FFC
+
+	j c906_master_main
