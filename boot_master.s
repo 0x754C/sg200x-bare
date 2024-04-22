@@ -11,6 +11,6 @@ _start:
 	.word 0
 
 reset:
-	li sp, 0x0C001FFC
+	li sp, 0x0C00FFFC /* TPU_BASE + (64 * 1024) - 4 */
 
 	j c906_master_main

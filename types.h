@@ -1,7 +1,6 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
-
 #ifndef uint8_t
 #define uint8_t unsigned char
 #endif
