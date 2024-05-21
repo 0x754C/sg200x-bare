@@ -44,3 +44,7 @@ mkdir -p /mnt/boot
 sudo mount /dev/sdX1 /mnt/boot
 sudo cp -v fip.bin /mnt/boot
 #+END_SRC
+
+* other
+
+zForth: https://github.com/0x754C/zForth/tree/master/src/cv18xx
