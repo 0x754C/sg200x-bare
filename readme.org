@@ -47,4 +47,4 @@ sudo cp -v fip.bin /mnt/boot
 
 * other
 
-zForth: https://github.com/0x754C/zForth/tree/master/src/cv18xx
+zForth: https://github.com/0x754C/zForth/tree/cv18xx/src/cv18xx
